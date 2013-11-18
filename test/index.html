@@ -12,9 +12,48 @@ html,body {width:100%;height:100%;}
 <script src="../dist/jaguar.js"></script>
 </head>
 <body>
+<textarea id="console" readonly rows="5"></textarea>
 <div id="container" class="container"></div>
 <script>
+var elConsole = document.getElementById('console');
 
+var layer = new collie.Layer({
+    width: 320,
+    height: 480
+}).addTo();
+
+new collie.DisplayObject({
+    width: 100,
+    height: 100,
+    x: 0,
+    y: "center",
+    backgroundColor: 'red',
+    velocityX: 50,
+    velocityRotate: 50,
+    rangeX: [0, 320],
+    positionRepeat: true
+}).addTo(layer);
+
+collie.Timer.repeat(function (e) {
+    // elConsole.value = (+new Date()) + '\n' + elConsole.value;
+    elConsole.value = e.count + '\n' + elConsole.value;
+}, 1000);
+
+collie.Renderer.load(document.getElementById('container'));
+collie.Renderer.start();
+
+collie.Renderer.attach({
+    'pause': function () {
+        elConsole.value = 'pause' + '\n' + elConsole.value;
+    },
+
+});
+
+layer.attach({
+    'click': function () {
+        collie.Renderer.resume();
+    }
+});
 </script>
 </body>
 </html>
