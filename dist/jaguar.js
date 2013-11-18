@@ -8920,6 +8920,12 @@ collie.Renderer = collie.Renderer || new (collie.Class(/** @lends collie.Rendere
      * @type {Boolean} 
      */
     USE_AUTO_PAUSE : true,
+
+    /**
+     * If The Renderer can't render the screen in this time, It should be paused.
+     * @type {Number} ms
+     */
+    DELAY_LIMIT : 3 * 1000,
     
     $init : function () {
         this._sVisibilityChange = this._getNamePageVisibility();
@@ -8950,8 +8956,8 @@ collie.Renderer = collie.Renderer || new (collie.Class(/** @lends collie.Rendere
         this._bIsPreventDefault = true;
         this._htDeviceInfo = collie.util.getDeviceInfo();
         this._fOnChangeVisibility = this._onChangeVisibility.bind(this);
-        this._fOnPageShow = this._onPageShow.bind(this)
-        this._fOnPageHide = this._onPageHide.bind(this)
+        this._fOnPageShow = this._onPageShow.bind(this);
+        this._fOnPageHide = this._onPageHide.bind(this);
         this._fRefresh = this.refresh.bind(this);
     },
     
@@ -9417,7 +9423,7 @@ collie.Renderer = collie.Renderer || new (collie.Class(/** @lends collie.Rendere
         if (!this._bPlaying && !bForcePlay) {
             return;
         }
-        
+
         var nTime = this._getDate();
         var nRealDuration = 0;
         var nFrameStep = 1; // 진행할 프레임 단계
@@ -9427,6 +9433,11 @@ collie.Renderer = collie.Renderer || new (collie.Class(/** @lends collie.Rendere
             nRealDuration = nTime - this._nBeforeFrameTime; // 실제 걸린 시간
             nFrameStep = nSkippedFrame || Math.max(1, Math.round(nRealDuration / this._nDuration)); // 60fps 미만으로는 버린다
             
+            if (nRealDuration > this.DELAY_LIMIT) {
+                this.pause();
+                return;
+            }
+
             // requestAnimationFrame 인자가 들어옴
             if (this._sRequestAnimationFrameName !== false && this.USE_AUTO_PAUSE) {
                 nSkippedFrame = 0;
