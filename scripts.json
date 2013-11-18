@@ -3,6 +3,7 @@
         "Common.js",
         "lib/collie.Effect.js",
         "Component.js",
+        "SpriteSheet.js",
         "ImageManager.js",
         "Matrix.js",
         "Transform.js",

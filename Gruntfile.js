@@ -4,14 +4,22 @@
 module.exports = function (grunt) {
     var path = require('path');
     var scripts = grunt.file.readJSON('scripts.json');
-    var SRC = SRC;
+    var SRC = './src';
     var DIST = './dist';
     var names = {
         main: 'jaguar',
         addon: 'jaguar.addon',
         tool: 'jaguar.tool',
-        ext: '.js'
+        ext: '.js',
+        min: '.min'
     };
+
+    // Prepend a source path
+    for (var i in scripts) {
+        scripts[i] = scripts[i].map(function (v) {
+            return SRC + '/' + v;
+        });
+    }
 
     grunt.initConfig({
         // 패키지 파일
@@ -37,19 +45,16 @@ module.exports = function (grunt) {
 
         watch: {
             main: {
-                src: SRC,
                 files: scripts.main,
-                tasks: ['default']
+                tasks: ['main']
             },
 
             addon: {
-                src: SRC,
                 files: scripts.addon,
                 tasks: ['addon']
             },
 
             tool: {
-                src: SRC,
                 files: scripts.tool,
                 tasks: ['tool']
             }
@@ -59,23 +64,20 @@ module.exports = function (grunt) {
         concat: {
             options: {
                 // Workaround missing a semicolon
-                separator: '\n;\n',
+                separator: '\n;\n'
             },
             main: {
-                src: SRC,
-                files: scripts.main,
+                src: scripts.main,
                 dest: DIST + '/' + names.main + names.ext
             },
             addon: {
-                src: SRC,
-                files: scripts.addon,
+                src: scripts.addon,
                 dest: DIST + '/' + names.addon + names.ext
             },
             tool: {
-                src: SRC,
-                files: scripts.tool,
+                src: scripts.tool,
                 dest: DIST + '/' + names.tool + names.ext
-            },
+            }
         },
 
         'string-replace': {
@@ -88,27 +90,54 @@ module.exports = function (grunt) {
                         }
                     ]
                 },
-                files: [DIST + '/' + names.main + names.ext]
+                src: DIST + '/' + names.main + names.ext,
+                dest: DIST + '/' + names.main + names.ext
+            },
+
+            minify: {
+                options: {
+                    replacements: [
+                        {
+                            pattern: /\{\{version\}\}/g,
+                            replacement: '<%=pkg.version%>'
+                        }
+                    ]
+                },
+                src: DIST + '/' + names.main + names.min + names.ext,
+                dest: DIST + '/' + names.main + names.min + names.ext
             }
-        }
+        },
 
         // https://github.com/gruntjs/grunt-contrib-uglify
-        // uglify: {
-        //     build: {
-        //         options: {
-        //             // TODO Add a sourcemap option
-        //         },
-        //         src: path.join(DEPLOY_PATH, 'js/space.merge.js'),
-        //         dest: path.join(DEPLOY_PATH, 'js/space.js')
-        //     }
-        // }
+        uglify: {
+            main: {
+                options: {
+                    // TODO Add a sourcemap option
+                },
+                src: scripts.main,
+                dest: DIST + '/' + names.main + names.min + names.ext
+            },
+            addon: {
+                options: {
+                    // TODO Add a sourcemap option
+                },
+                src: scripts.addon,
+                dest: DIST + '/' + names.addon + names.min + names.ext
+            },
+            tool: {
+                options: {
+                    // TODO Add a sourcemap option
+                },
+                src: scripts.tool,
+                dest: DIST + '/' + names.tool + names.min + names.ext
+            }
+        }
     });
 
     // Load task libraries
     [
         'grunt-contrib-connect',
         'grunt-contrib-watch',
-        'grunt-contrib-copy',
         'grunt-contrib-concat',
         'grunt-contrib-uglify',
         'grunt-string-replace'
@@ -117,18 +146,31 @@ module.exports = function (grunt) {
     });
 
     // Definitions of tasks
-    grunt.resgisterTask('default', 'Build All files', [
-        'main',
-        'addon',
-        'tool'
+    grunt.registerTask('default', 'Watch project files', [
+        'build', 'watch'
+    ]);
+
+    grunt.registerTask('build', 'Build a jaguar.js file', [
+        'main', 'addon', 'tool'
     ]);
 
     grunt.registerTask('main', 'Build a jaguar.js file', [
         'concat:main',
         'string-replace:main'
     ]);
+
     grunt.registerTask('addon', 'Build a jaguar.addon.js file', [
+        'concat:addon'
     ]);
+    
     grunt.registerTask('tool', 'Build a jaguar.tool.js file', [
+        'concat:tool'
+    ]);
+
+    grunt.registerTask('minify', 'Minify All jaguar files', [
+        'uglify:main',
+        'uglify:addon',
+        'uglify:tool',
+        'string-replace:minify'
     ]);
 };
