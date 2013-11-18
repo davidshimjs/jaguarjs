@@ -1,0 +1,48 @@
+{
+    "main": [
+        "Common.js",
+        "lib/collie.Effect.js",
+        "Component.js",
+        "ImageManager.js",
+        "Matrix.js",
+        "Transform.js",
+        "layer/LayerCanvas.js",
+        "layer/LayerDOM.js",
+        "layer/LayerEvent.js",
+        "layer/Layer.js",
+        "display/DisplayObjectCanvas.js",
+        "display/DisplayObjectDOM.js",
+        "display/DisplayObject.js",
+        "display/MovableObject.js",
+        "display/Rectangle.js",
+        "display/Circle.js",
+        "display/Polyline.js",
+        "display/Text.js",
+        "timer/Animation.js",
+        "timer/AnimationTransition.js",
+        "timer/AnimationRepeat.js",
+        "timer/AnimationCycle.js",
+        "timer/AnimationDelay.js",
+        "timer/AnimationTimeline.js",
+        "timer/AnimationQueue.js",
+        "timer/TimerList.js",
+        "timer/Timer.js",
+        "Renderer.js"
+    ],
+
+    "addon": [
+        "extension/Box2d.js",
+        "extension/ImageNumber.js",
+        "extension/Pool.js",
+        "extension/Sensor.js",
+        "extension/Map.js",
+        "extension/IsometricMap.js",
+        "extension/HexagonalMap.js",
+        "extension/PathFinding.js"
+    ],
+
+    "tool": [
+        "tool/FPSConsole.js",
+        "tool/Profiling.js"
+    ]
+}
