@@ -47,6 +47,12 @@ collie.DisplayObjectDOM = collie.Class(/** @lends collie.DisplayObjectDOM.protot
             this._elContainerStyle.width = this._htInfo.width + "px";
             this._elContainerStyle.height = this._htInfo.height + "px"; 
         }
+
+        if (this._htInfo.useCache) {
+            this._elContainerStyle.overflow = "hidden";
+            this._elContainerStyle.width = this._htInfo.width + "px";
+            this._elContainerStyle.height = this._htInfo.height + "px"; 
+        }
         
         // element
         this._el = document.createElement("div");
