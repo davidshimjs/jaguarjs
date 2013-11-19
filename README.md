@@ -20,8 +20,11 @@ How to build
 
     ```
     $ grunt build
-    ```    
-    There are many commands for building the jaguar project.
-    - `default` or an empty value: Watch project files. It'll build all files when you edit .js files.
-    - `build`: Build all files. Destination is a `dist` folder.
-    - `minify`: Minify all files. Destination is a `dist` folder.
+    ```
+    - `default` or an empty value: Watch project files. It'll build all files for debuggin when you edit .js files.
+    - `build`: Build all files info a `dist` folder.
+    
+Forum
+---
+Submit any problems or points of improvement detected during use in the forum.
+https://groups.google.com/forum/?fromgroups=#!forum/colliejs

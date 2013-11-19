@@ -6,6 +6,7 @@ module.exports = function (grunt) {
     var scripts = grunt.file.readJSON('scripts.json');
     var SRC = './src';
     var DIST = './dist';
+    var DEBUG = './debug';
     var names = {
         main: 'jaguar',
         addon: 'jaguar.addon',
@@ -20,6 +21,8 @@ module.exports = function (grunt) {
             return SRC + '/' + v;
         });
     }
+
+    scripts.all = [].concat(scripts.main, scripts.addon, scripts.tool);
 
     grunt.initConfig({
         // 패키지 파일
@@ -44,19 +47,9 @@ module.exports = function (grunt) {
         },
 
         watch: {
-            main: {
-                files: scripts.main,
-                tasks: ['main']
-            },
-
-            addon: {
-                files: scripts.addon,
-                tasks: ['addon']
-            },
-
-            tool: {
-                files: scripts.tool,
-                tasks: ['tool']
+            debug: {
+                files: scripts.all,
+                tasks: ['debug']
             }
         },
 
@@ -65,6 +58,18 @@ module.exports = function (grunt) {
             options: {
                 // Workaround missing a semicolon
                 separator: '\n;\n'
+            },
+            debug: {
+                files: [{
+                    src: scripts.main,
+                    dest: DEBUG + '/' + names.main + names.ext
+                }, {
+                    src: scripts.addon,
+                    dest: DEBUG + '/' + names.addon + names.ext
+                }, {
+                    src: scripts.tool,
+                    dest: DEBUG + '/' + names.tool + names.ext
+                }]
             },
             main: {
                 src: scripts.main,
@@ -81,6 +86,19 @@ module.exports = function (grunt) {
         },
 
         'string-replace': {
+            debug: {
+                options: {
+                    replacements: [
+                        {
+                            pattern: /\{\{version\}\}/g,
+                            replacement: '<%=pkg.version%>-debug'
+                        }
+                    ]
+                },
+                src: DEBUG + '/' + names.main + names.ext,
+                dest: DEBUG + '/' + names.main + names.ext
+            },
+            
             main: {
                 options: {
                     replacements: [
@@ -139,6 +157,7 @@ module.exports = function (grunt) {
         'grunt-contrib-connect',
         'grunt-contrib-watch',
         'grunt-contrib-concat',
+        'grunt-contrib-copy',
         'grunt-contrib-uglify',
         'grunt-string-replace'
     ].forEach(function (taskName) {
@@ -147,11 +166,16 @@ module.exports = function (grunt) {
 
     // Definitions of tasks
     grunt.registerTask('default', 'Watch project files', [
-        'build', 'watch'
+        'debug', 'watch'
+    ]);
+
+    grunt.registerTask('debug', 'Create a jaguar.js file for debugging', [
+        'concat:debug',
+        'string-replace:debug'
     ]);
 
     grunt.registerTask('build', 'Build a jaguar.js file', [
-        'main', 'addon', 'tool'
+        'main', 'addon', 'tool', 'minify'
     ]);
 
     grunt.registerTask('main', 'Build a jaguar.js file', [
