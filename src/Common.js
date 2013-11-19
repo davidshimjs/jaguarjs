@@ -200,6 +200,7 @@ var collie = collie || {};
             var bIsIOS = false;
             var bIsIE = false;
             var bHasChrome = (/chrome/i.test(sAgent)) ? true : false;
+            var bHiggs = (/Higgs/i.test(sAgent))? true: false; // The Higgs is a browser engine made by Naver Corporation
             var sAgent = sAgent || navigator.userAgent;
             var nVersion = 0;
             
@@ -236,7 +237,8 @@ var collie = collie || {};
                 android : bIsAndroid ? nVersion : false,
                 ios : bIsIOS ? nVersion : false,
                 ie : bIsIE ? nVersion : false,
-                chrome : bHasChrome
+                chrome : bHasChrome,
+                higgs : bHiggs
             };
             
             return this._htDeviceInfo;
