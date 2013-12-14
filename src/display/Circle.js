@@ -1,34 +1,34 @@
 /**
  * Drawing Circle
- * If you want to see a circle using DOM Rendering, you need the <a href="http://raphaeljs.com" target="_blank">Raphael.js</a> 2.1.0 or above.
+ * If you want to draw a circle using DOM rendering, you need the <a href="http://raphaeljs.com" target="_blank">Raphael.js</a> library, version 2.1.0 or newer.
  * 
  * @class
  * @extends collie.DisplayObject
  * @requires http://raphaeljs.com
  * @param {Object} [htOption] Options
- * @param {Number} [htOption.radius=0] Radius(px)
+ * @param {Number} [htOption.radius=0] Radius (px)
  * @param {String} [htOption.strokeColor] Stroke color
- * @param {Number} [htOption.strokeWidth=0] Border width. It'll be disappear when you set this option as 0.
- * @param {String} [htOption.fillColor] Inside color. The Default value is a transparent color.
- * @param {String} [htOption.fillImage] Fill the image inside a polyline
- * @param {Number} [htOption.startAngle=0] Starting Angle(degree)
- * @param {Number} [htOption.endAngle=360] Ending Angle(degree), The Circle would be fully filled when you set starting angle as 0 and set ending angle as 360.
- * @param {Boolean} [htOption.closePath=false] Closing a Path. like a pac-man.
- * @param {Boolean} [htOption.autoExpand=true] When this options set as true, the circle object expands to fit size to diameter.
- * @param {Boolean} [htOption.anticlockwise=false] The Circle will be filled anticlockwise when you set this option as true.
+ * @param {Number} [htOption.strokeWidth=0] Border width. Set this option to 0 to disable the border.
+ * @param {String} [htOption.fillColor] Color to fill the circle with. The default value is transparent.
+ * @param {String} [htOption.fillImage] Image to fill the circle with.
+ * @param {Number} [htOption.startAngle=0] Starting angle (degrees)
+ * @param {Number} [htOption.endAngle=360] Ending angle (degrees). Set a starting angle of 0 and an ending angle of 360 to fully fill the Circle.
+ * @param {Boolean} [htOption.closePath=false] Close the path (like a Pac-man).
+ * @param {Boolean} [htOption.autoExpand=true] Set this option to true to expand the Circle object to fit its size to diameter.
+ * @param {Boolean} [htOption.anticlockwise=false] Set this option to true to fill the Circle anticlockwise.
  * @example
  * // Draw a Circle
  * var circle = new collie.Circle({
- *  radius : 20 // The circle object just expands to fit size to diameter. (width:40, height:40)
+ *  radius : 20 // The Circle object just expands to fit its size to diameter. (width:40, height:40)
  * }).addTo(layer);
  * 
- * // arc
+ * // Arc
  * circle.set({
  *  startAngle : 0,
  *  endAngle : 270
  * });
  * 
- * // a pac-man
+ * // A Pac-man
  * circle.set({
  *  startAngle : 45,
  *  endAngle : 315,
@@ -214,7 +214,7 @@ collie.Circle = collie.Class(/** @lends collie.Circle.prototype */{
     },
     
     /**
-     * Move a position by a center of the circle.
+     * Move the position of the Circle, relatively to its center.
      * 
      * @param {Number} nCenterX
      * @param {Number} nCenterY
@@ -227,7 +227,7 @@ collie.Circle = collie.Class(/** @lends collie.Circle.prototype */{
     },
     
     /**
-     * Returns information of The Class as String
+     * Returns information on the Class as String
      * 
      * @return {String}
      */
