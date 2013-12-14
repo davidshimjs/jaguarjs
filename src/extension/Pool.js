@@ -1,9 +1,9 @@
 /**
- * A Simple Object Pool
+ * A simple object Pool
  * 
  * @class
- * @param {Number} nSize Pool Size
- * @param {Object} htOption Default options to make displayObjects
+ * @param {Number} nSize Pool size (number of objects in the Pool)
+ * @param {Object} htOption Default options to create displayObjects
  * @param {Function} [fClass=collie.DisplayObject] The Pool contains objects created by this class
  * @requires collie.addon.js
  * @example
@@ -11,24 +11,24 @@
  *  backgroundImage : "test"
  * }); 
  * 
- * // Uses 5 objects
+ * // Use 5 objects
  * var a = pool.get().addTo(layer);
  * var b = pool.get().addTo(layer);
  * var c = pool.get().addTo(layer);
  * var d = pool.get().addTo(layer);
  * var e = pool.get().addTo(layer);
  * 
- * // Releases 5 objects
+ * // Release 5 objects
  * pool.release(a);
  * pool.release(b);
  * pool.release(c);
  * pool.release(d);
  * pool.release(e);
  *
- * // change pool size after initialize a pool class.
+ * // Change Pool size after initializing a Pool class.
  * pool.changeSize(20);
  * @example
- * You can also make the pool contains other classes.
+ * You can also make the Pool contain other classes.
  * <code>
  * var circlePool = new collie.Pool(10, {
  *  radius : 10
@@ -62,7 +62,7 @@ collie.Pool = collie.Class(/** @lends collie.Pool.prototype */{
     },
     
     /**
-     * Change a size of the pool.
+     * Change the size of the Pool.
      * @param {Number} nSize
      */
     changeSize : function (nSize) {
@@ -78,7 +78,7 @@ collie.Pool = collie.Class(/** @lends collie.Pool.prototype */{
     },
     
     /**
-     * Change a default options to make displayObjects
+     * Change the default options to create displayObjects
      * @param {Object} htOption
      */
     changeOption : function (htOption) {
@@ -86,7 +86,7 @@ collie.Pool = collie.Class(/** @lends collie.Pool.prototype */{
     },
     
     /**
-     * Get an object in pool
+     * Get an object from the Pool
      */
     get : function () {
         if (!this._aPool.length) {
@@ -99,7 +99,7 @@ collie.Pool = collie.Class(/** @lends collie.Pool.prototype */{
     },
     
     /**
-     * Release an object
+     * Release an object from the Pool
      * 
      * @param {collie.DisplayObject} oTarget
      */
