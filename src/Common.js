@@ -5,19 +5,16 @@ var collie = collie || {};
 
 (function () {
     /**
-     * 콜리 버전
-     * 
+     * It'll be replaced automatically. so you don't need edit this value.
      * @name collie.version
-     * @description 자동 치환되므로 직접 수정하지 않는다.
      */
     collie.version = "{{version}}";
 
     /**
-     * 클래스 만들기
-     * 
+     * Make a Class
      * @method collie#Class
-     * @param {Object} o 클래스 멤버, $init을 이용해 생성자를 정의할 수 있다.
-     * @param {collie.Class} oParent 상속받을 부모 클래스
+     * @param {Object} o An Object contains members of this class. You can define the constructor with a `$init` property.
+     * @param {collie.Class} [oParent] You can insert a superclass if you need to inherit.
      * @return {collie.Class}
      * @example
      * ```
@@ -55,7 +52,7 @@ var collie = collie || {};
      * }, Person);
      * ```
      * @example
-     * You can also use create a instance without 'new' keyword
+     * You can also create an instance without 'new' keyword
      * ```
      * var Person = collie.Class({
      *  $init : function () {
@@ -68,7 +65,7 @@ var collie = collie || {};
      * var b = Person(); // It works fine!
      * ```
      */
-    collie.Class = function (o, oParent) {      
+    collie.Class = function (o, oParent) {
         var $init = null;
         var checkDirectCall = function () { return true; };
         var F;
@@ -106,10 +103,10 @@ var collie = collie || {};
                     args = args[1];
                 }
                 
-                // 부모의 생성자 실행
+                // runs constructor of a superclass
                 oParent.apply(this, args);
                 
-                // 자식의 생성자 실행
+                // runs constructor of current class
                 if ($init !== null) {
                     $init.apply(this, args);
                 }
@@ -132,7 +129,7 @@ var collie = collie || {};
     };
     
     /**
-     * 자주 쓰이는 유틸 모음
+     * utilities
      * @namespace
      */
     collie.util = new (collie.Class(/** @lends collie.util */{
@@ -150,8 +147,8 @@ var collie = collie || {};
         },
         
         /**
-         * 아이디로 표시 객체 인스턴스를 가져온다
-         * 주로 DOM 방식일 때 사용 된다
+         * Get an instance of DisplayObject by Id
+         * It mainly be used with DOM rendering.
          * 
          * @param {Number} nId
          * @return {collie.DisplayObject}
@@ -161,7 +158,7 @@ var collie = collie || {};
         },
         
         /**
-         * name으로 표시 객체 인스턴스를 가져온다
+         * Get an instance of DisplayObject by name
          * 
          * @param {String} sName
          * @return {collie.DisplayObject}
@@ -177,16 +174,15 @@ var collie = collie || {};
         },
         
         /**
-         * userAgent 값으로 현재 단말 정보를 반환 한다
-         * 값을 한번 얻어오면 다음부터는 캐시된 값을 사용 한다
+         * Returns an information of current device by an user-agent value.
          * 
          * @return {Object} htInfo
-         * @return {Boolean} htInfo.desktop 데스크탑 여부
-         * @return {Boolean} htInfo.supportCanvas 캔버스 지원 여부
-         * @return {Boolean|Number} htInfo.android 안드로이드라면 두번째까지의 버젼, 안드로이드가 아니라면 false
-         * @return {Boolean|Number} htInfo.ios iOS라면 두번째까지의 버젼, iOS가 아니라면 false
-         * @return {Boolean|Number} htInfo.ie IE 브라우저라면 첫번째까지의 버전, IE 브라우저가 아니라면 false
-         * @return {Boolean|Number} htInfo.chrome Agent에 Chrome이 포함돼 있는지 여부
+         * @return {Boolean} htInfo.desktop whether it's a desktop or not
+         * @return {Boolean} htInfo.supportCanvas whether it supports CANVAS rendering or not
+         * @return {Boolean|Number} htInfo.android An Android version to two demical place. If It's not an android, It'll be false.
+         * @return {Boolean|Number} htInfo.ios iOS version. same as `htInfo.android`
+         * @return {Boolean|Number} htInfo.ie IE version. same as `htInfo.android`.
+         * @return {Boolean|Number} htInfo.chrome whether an user-agent value contains `chrome` or not.
          */
         getDeviceInfo : function (sAgent) {
             if (this._htDeviceInfo !== null && typeof sAgent === "undefined") {
@@ -245,18 +241,16 @@ var collie = collie || {};
         },
         
         /**
-         * 브라우저에 따른 CSS Prefix를 반환
+         * Returns CSS vendor prefix
          * 
-         * @param {String} sName 대상 CSS 속성 명 (- 포함), 값이 없으면 prefix만 반환
-         * @param {Boolean} bJavascript 자바스크립트 속성 타입으로 반환
+         * @param {String} [sName] target CSS property name(included `-`). If It's an empty value, this method'll return only prefix.
+         * @param {Boolean} bJavascript you'll set this value as true if you want to use at javascript.
          * @example
+         * ```
          * collie.util.getCSSPrefix("transform"); // -webkit-transform
          * collie.util.getCSSPrefix("transform", true); // webkitTransform
-         * 
-         * // prefix가 없을 때
-         * collie.util.getCSSPrefix("transform"); // transform
-         * collie.util.getCSSPrefix("transform", true); // transform
-         * @return {String} 조합된 CSS Prefix, 혹은 속성 명
+         * ```
+         * @return {String} CSS Vendor prefix
          */
         getCSSPrefix : function (sName, bJavascript) {
             var sResult = '';
@@ -264,7 +258,6 @@ var collie = collie || {};
             if (this._sCSSPrefix === null) {
                 this._sCSSPrefix = '';
                 
-                // webkit이 가장 먼저 쓰일 것 같아서 webkit을 최상단으로 옮김
                 if (typeof document.body.style.webkitTransform !== "undefined") {
                     this._sCSSPrefix = "-webkit-";
                 } else if (typeof document.body.style.MozTransform !== "undefined") {
@@ -278,7 +271,6 @@ var collie = collie || {};
             
             sResult = this._sCSSPrefix + (sName ? sName : '');
             
-            // - 빼기
             if (bJavascript) {
                 var aTmp = sResult.split("-");
                 sResult = '';
@@ -298,8 +290,7 @@ var collie = collie || {};
         },
         
         /**
-         * CSS3를 지원하는지 여부
-         * 
+         * Whether current device supports CSS3 or not
          * @return {Boolean}
          */
         getSupportCSS3 : function () {
@@ -311,8 +302,7 @@ var collie = collie || {};
         },
         
         /**
-         * CSS3d를 지원하는지 여부
-         * 
+         * Whether current device supports CSS3D or not
          * @return {Boolean}
          */
         getSupportCSS3d : function () {
@@ -324,8 +314,7 @@ var collie = collie || {};
         },
         
         /**
-         * 각도를 라디안으로 변환
-         * 
+         * Converts Degree to Radian
          * @param {Number} nDeg
          * @return {Number}
          */
@@ -334,8 +323,7 @@ var collie = collie || {};
         },
         
         /**
-         * 라디안을 각도로 변환
-         * 
+         * Converts Radian to Degree
          * @param {Number} nRad
          * @return {Number}
          */
@@ -344,10 +332,8 @@ var collie = collie || {};
         },
         
         /**
-         * 근사값 구함(소수 7자리 미만은 버림)
-         * - javascript 소숫점 연산 오류로 인한 근사값 연산임
-         * 
-         * @param {Number} nValue 값
+         * Get an approximate value to avoid a floating value bug.
+         * @param {Number} nValue
          * @return {Number}
          */
         approximateValue : function (nValue) {
@@ -355,9 +341,8 @@ var collie = collie || {};
         },
         
         /**
-         * 각도를 0~360 값 사이로 맞춤
-         * 
-         * @param {Number} nAngleRad 라디안 값
+         * Fixed degree value between 0 and 360
+         * @param {Number} nAngleRad radian angle
          * @return {Number}
          */
         fixAngle : function (nAngleRad) {
@@ -367,22 +352,21 @@ var collie = collie || {};
         },
         
         /**
-         * 거리를 반환
-         * 
+         * Returns distance between two points
          * @param {Number} x1
          * @param {Number} y1
          * @param {Number} x2
          * @param {Number} y2
-         * @return {Number} 거리
+         * @return {Number}
          */
         getDistance : function (x1, y1, x2, y2) {
             return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
         },
         
         /**
-         * 점 배열에서 최소 사각형 영역을 구한다
+         * Returns a minimum boundary
          * 
-         * @param {Array} aPoints 대상 배열 [[x1, y1], [x2, y2], ... ]
+         * @param {Array} aPoints target array [[x1, y1], [x2, y2], ... ]
          * @return {Object} htResult
          * @return {Number} htResult.left
          * @return {Number} htResult.right
@@ -411,8 +395,7 @@ var collie = collie || {};
         },
         
         /**
-         * boundary를 points로 변환한다
-         * 
+         * Converts boundary to points
          * @param {Object} htBoundary
          * @param {Number} htBoundary.left
          * @param {Number} htBoundary.right
@@ -444,9 +427,8 @@ var collie = collie || {};
         },
         
         /**
-         * 객체를 복사
-         * 
-         * @param {Object} oSource 원본 객체
+         * Clone an object
+         * @param {Object} oSource source object
          * @return {Object}
          */
         cloneObject : function (oSource) {
@@ -460,10 +442,9 @@ var collie = collie || {};
         },
         
         /**
-         * zIndex에 따라 오름차순 정렬된 순서로 배열에 넣는다
-         * 
+         * Insert to target array sorted `zIndex` value on DisplayObject
          * @private
-         * @param {Array} aTarget
+         * @param {Array} aTarget Target array
          * @param {collie.DisplayObject} oDisplayObject
          */
         pushWithSort : function (aTarget, oDisplayObject) {
@@ -483,12 +464,11 @@ var collie = collie || {};
         },
         
         /**
-         * DOM의 addEventListener
-         * 
+         * element.addEventListener for cross-browsing
          * @param {HTMLElement|String} el
-         * @param {String} sName 이벤트 이름, on을 제외한 이름
-         * @param {Function} fHandler 바인딩할 함수
-         * @param {Boolean} bUseCapture 캡쳐 사용 여부
+         * @param {String} sName event name excluded `on` keyword.
+         * @param {Function} fHandler Event handler
+         * @param {Boolean} bUseCapture
          */
         addEventListener : function (el, sName, fHandler, bUseCapture) {
             if (typeof el === "string") {
@@ -503,12 +483,11 @@ var collie = collie || {};
         },
         
         /**
-         * DOM의 removeEventListener
-         * 
+         * element.removeEventListener for cross-browsing
          * @param {HTMLElement|String} el
-         * @param {String} sName 이벤트 이름, on을 제외한 이름
-         * @param {Function} fHandler 바인딩할 함수
-         * @param {Boolean} bUseCapture 캡쳐 사용 여부
+         * @param {String} sName event name excluded `on` keyword.
+         * @param {Function} fHandler Event handler
+         * @param {Boolean} bUseCapture
          */
         removeEventListener : function (el, sName, fHandler, bUseCapture) {
             if (typeof el === "string") {
@@ -523,8 +502,7 @@ var collie = collie || {};
         },
         
         /**
-         * 이벤트의 기본 동작을 멈춘다
-         * 
+         * `event.preventDefault` method for cross-browsing
          * @param {HTMLEvent} e
          */
         stopEventDefault : function (e) {
@@ -538,9 +516,8 @@ var collie = collie || {};
         },
         
         /**
-         * 엘리먼트의 위치를 구한다
-         * 
-         * @param {HTMLElement|String}
+         * Get an position of a target element
+         * @param {HTMLElement|String} target element
          * @return {Object} htResult
          * @return {Number} htResult.x 
          * @return {Number} htResult.y
@@ -593,15 +570,6 @@ var collie = collie || {};
             return htPosition;
         }
     }))();
-    
-    // iOS에서 상단바 숨기기
-    if (collie.util.getDeviceInfo().ios) {
-        window.addEventListener("load", function () {
-            setTimeout(function () {
-                document.body.scrollTop = 0;
-            }, 300);
-        });
-    }
     
     // bind polyfill, https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/bind
     if (!Function.prototype.bind) {
