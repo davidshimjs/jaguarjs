@@ -26,6 +26,10 @@ How to build
     - `doc`: Make documentations into a 'docs/dist' folder.
     - `doc_debug`: Make a simple documentation for debugging.
     
+Documentations
+---
+http://davidshimjs.github.io/jaguarjs/doc/index.html
+
 Forum
 ---
 Submit any problems or points of improvement detected during use in the forum.
