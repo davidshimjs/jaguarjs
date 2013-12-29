@@ -17,12 +17,9 @@
  * collie.Renderer.start();
  * @requires collie.tool.js
  * @extends collie.Component
- * @class collie.FPSConsole
+ * @class
  */
 collie.FPSConsole = collie.Class(/** @lends collie.FPSConsole.prototype */{
-    /**
-     * @constructs
-     */
     $init : function (htOption) {
         this.option({
             color : 'gray',

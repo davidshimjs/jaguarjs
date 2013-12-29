@@ -1,7 +1,7 @@
 /**
  * Rectangle
  * - Rounded
- * @class collie.Rectangle
+ * @class
  * @extends collie.DisplayObject
  * @param {Object} [htOption] 설정
  * @param {Number} [htOption.radius=0] 테두리 굴림 값 (px)
@@ -11,9 +11,6 @@
  * @param {String} [htOption.fillImage] 채울 이미지
  */
 collie.Rectangle = collie.Class(/** @lends collie.Rectangle.prototype */{
-    /**
-     * @constructs
-     */
     $init : function (htOption) {
         this.option({
             radius : 0,

@@ -2,14 +2,10 @@
  * DOM 방식의 렌더링
  * 
  * @private
- * @class collie.LayerDOM
+ * @class
  * @param {collie.Layer} oLayer
  */
 collie.LayerDOM = collie.Class(/** @lends collie.LayerDOM.prototype */{
-    /**
-     * @private
-     * @constructs
-     */
     $init : function (oLayer) {
         this._oLayer = oLayer;
         this._oEvent = oLayer.getEvent();

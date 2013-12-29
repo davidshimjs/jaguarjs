@@ -1,11 +1,12 @@
 /**
  * 설정된 시간동안 지연 후에 실행되는 타이머
- * <a href="../tutorial/timer_delay.html" target="_blank">튜토리얼 보기</a>
+ * 
+ * [튜토리얼 보기](../tutorial/timer_delay.html)
  * 
  * timeline ----------&gt;
  * action   duration *
  * @see collie.Timer
- * @class collie.AnimationDelay
+ * @class
  * @extends collie.Animation
  * @param {Function} fCallback 실행될 콜백 함수
  * @param {collie.AnimationDelay} fCallback.timer 현재 타이머 인스턴스
@@ -15,9 +16,6 @@
  * @param {Number} nDuration 시간 간격 ms
  */
 collie.AnimationDelay = collie.Class(/** @lends collie.AnimationDelay.prototype */{
-    /**
-     * @constructs
-     */
     $init : function (fCallback, nDuration) {
         this.reset();
     },

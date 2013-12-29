@@ -14,7 +14,8 @@ collie.Renderer = collie.Renderer || new (collie.Class(/** @lends collie.Rendere
     
     /**
      * 레티나 디스플레이 여부 auto 값일 경우 자동 판단, true/false 값은 수동
-     * @type {String|Boolean} auto 일 때 자동 판단 됨
+     * auto 일 때 자동 판단 됨
+     * @type {String|Boolean}
      */
     RETINA_DISPLAY : false,
     
@@ -51,7 +52,8 @@ collie.Renderer = collie.Renderer || new (collie.Class(/** @lends collie.Rendere
 
     /**
      * If The Renderer can't render the screen in this time, It should be paused.
-     * @type {Number} ms
+     * (ms)
+     * @type {Number}
      */
     DELAY_LIMIT : 3 * 1000,
     
@@ -486,10 +488,10 @@ collie.Renderer = collie.Renderer || new (collie.Class(/** @lends collie.Rendere
      * @param {Number} fCallback.duration 지연 시간 (ms)
      * @example
      * fps를 붙이면 FPS단위로 입력할 수 있다.
-     * <code>
+     * ```
      * collie.Renderer.start("30fps");
      * collie.Renderer.start(1000 / 30);
-     * </code>
+     * ```
      */
     start : function (vDuration, fCallback) {
         if (!this._bPlaying) {

@@ -1,9 +1,9 @@
 /**
  * 타임라인 기반으로 애니메이션을 실행시킴
- * <a href="../tutorial/timer_timeline.html" target="_blank">튜토리얼 보기</a>
+ * [튜토리얼 보기](../tutorial/timer_timeline.html)
  *  
  * @see collie.Timer
- * @class collie.AnimationTimeline
+ * @class
  * @extends collie.Animation
  * @param {Array} aTimeline 타임라인 배열
  * @param {Object} [htOption]
@@ -29,9 +29,6 @@
  * timeline.remove(10, action); // action만 삭제 
  */
 collie.AnimationTimeline = collie.Class(/** @lends collie.AnimationTimeline.prototype */{
-    /**
-     * @constructs
-     */
     $init : function (aTimeline, htOption) {
         this.option("loop", 1);
         this.option(htOption || {});

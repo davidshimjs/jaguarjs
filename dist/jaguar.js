@@ -200,6 +200,7 @@ var collie = collie || {};
             var bIsIOS = false;
             var bIsIE = false;
             var bHasChrome = (/chrome/i.test(sAgent)) ? true : false;
+            var bHiggs = (/Higgs/i.test(sAgent))? true: false; // The Higgs is a browser engine made by Naver Corporation
             var sAgent = sAgent || navigator.userAgent;
             var nVersion = 0;
             
@@ -236,7 +237,8 @@ var collie = collie || {};
                 android : bIsAndroid ? nVersion : false,
                 ios : bIsIOS ? nVersion : false,
                 ie : bIsIE ? nVersion : false,
-                chrome : bHasChrome
+                chrome : bHasChrome,
+                higgs : bHiggs
             };
             
             return this._htDeviceInfo;
@@ -4094,6 +4096,12 @@ collie.DisplayObjectDOM = collie.Class(/** @lends collie.DisplayObjectDOM.protot
         
         // IE의 경우 크기가 정해져 있지 않으면 filter가 정상적으로 작동하지 않음
         if (this._bIsIEUnder8) {
+            this._elContainerStyle.width = this._htInfo.width + "px";
+            this._elContainerStyle.height = this._htInfo.height + "px"; 
+        }
+
+        if (this._htInfo.useCache) {
+            this._elContainerStyle.overflow = "hidden";
             this._elContainerStyle.width = this._htInfo.width + "px";
             this._elContainerStyle.height = this._htInfo.height + "px"; 
         }

@@ -1,7 +1,7 @@
 /**
  * 레이어 이벤트 처리
  * 
- * @class collie.LayerEvent
+ * @class
  * @param {collie.Layer} oLayer
  */
 collie.LayerEvent = collie.Class(/** @lends collie.LayerEvent.prototype */{
@@ -12,9 +12,6 @@ collie.LayerEvent = collie.Class(/** @lends collie.LayerEvent.prototype */{
      */
     THRESHOLD_CLICK : 7,
 
-    /**
-     * @constructs
-     */
     $init : function (oLayer) {
         this._oLayer = oLayer;
         this._bHasTouchEvent = !!('ontouchstart' in window);

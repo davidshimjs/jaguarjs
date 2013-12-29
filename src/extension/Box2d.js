@@ -19,62 +19,57 @@
         
     /**
      * Box2d를 쉽게 사용할 수 있는 클래스
-     * Box2d-web 라이브러리가 필요하며 라이브러리는 <a href="http://code.google.com/p/box2dweb/" target="_blank">http://code.google.com/p/box2dweb/</a> 에서 다운로드 받을 수 있습니다.
+     * Box2d-web 라이브러리가 필요하며 라이브러리는 http://code.google.com/p/box2dweb/ 에서 다운로드 받을 수 있습니다.
+     * 
+     * @example
+     * var layer = new collie.Layer({
+     *  width: 300,
+     *  height: 300
+     * });
+     * 
+     * var box2d = new collie.Box2d(layer.option("width"), layer.option("height"), 10);
+     * box2d.addFixture("normal", {
+     *  density: 1.0,
+     *  friction: 0.5,
+     *  restitution: 0.2
+     * });
+     * 
+     * box2d.createWall("right");
+     * box2d.createWall("left");
+     * box2d.createWall("top");
+     * box2d.createWall("bottom", "ground");
+     * 
+     * var box = new DisplayObject({
+     *  x: "center",
+     *  y: "center",
+     *  width: 100,
+     *  height: 100,
+     *  backgroundColor: "red"
+     * }).addTo(layer);
+     * 
+     * box2d.createObject(box, {
+     *  type: "dynamic"
+     * }, "normal");
+     * 
+     * collie.Renderer.addLayer(layer);
+     * collie.Renderer.load(document.getElementById("contianer"));
+     * collie.Renderer.start();
+     *  
+     * @class
+     * @version 0.0.1
+     * @see http://code.google.com/p/box2dweb/
+     * @see http://www.box2dflash.org/docs/2.1a/reference/
+     * @requires collie.addon.js
+     * @requires box2d-web-2.1.a.3.js
+     * @param {Number} nWidth 스테이지 너비(px)
+     * @param {Number} nHeight 스테이지 높이(px)
+     * @param {Number} [nGravity=10] 중력
      */
     collie.Box2d = collie.Class(/** @lends collie.Box2d.prototype */{
         ITERATIONS_VELOCITY : 6, // 속도 체크의 정확도, 높을 수록 정확하다
         ITERATIONS_POSITION : 3, // 위치 체크의 정확도, 높을 수록 정확하다
         WIDTH_OF_WALL : 10, // 벽의 두께(px)
         
-        /**
-         * Box2d를 쉽게 사용할 수 있는 클래스
-         * Box2d-web 라이브러리가 필요하며 라이브러리는 <a href="http://code.google.com/p/box2dweb/" target="_blank">http://code.google.com/p/box2dweb/</a> 에서 다운로드 받을 수 있습니다.
-         * 
-         * @example
-         * var layer = new collie.Layer({
-         *  width: 300,
-         *  height: 300
-         * });
-         * 
-         * var box2d = new collie.Box2d(layer.option("width"), layer.option("height"), 10);
-         * box2d.addFixture("normal", {
-         *  density: 1.0,
-         *  friction: 0.5,
-         *  restitution: 0.2
-         * });
-         * 
-         * box2d.createWall("right");
-         * box2d.createWall("left");
-         * box2d.createWall("top");
-         * box2d.createWall("bottom", "ground");
-         * 
-         * var box = new DisplayObject({
-         *  x: "center",
-         *  y: "center",
-         *  width: 100,
-         *  height: 100,
-         *  backgroundColor: "red"
-         * }).addTo(layer);
-         * 
-         * box2d.createObject(box, {
-         *  type: "dynamic"
-         * }, "normal");
-         * 
-         * collie.Renderer.addLayer(layer);
-         * collie.Renderer.load(document.getElementById("contianer"));
-         * collie.Renderer.start();
-         *  
-         * @class collie.Box2d
-         * @version 0.0.1
-         * @see http://code.google.com/p/box2dweb/
-         * @see http://www.box2dflash.org/docs/2.1a/reference/
-         * @requires collie.addon.js
-         * @requires box2d-web-2.1.a.3.js
-         * @param {Number} nWidth 스테이지 너비(px)
-         * @param {Number} nHeight 스테이지 높이(px)
-         * @param {Number} [nGravity=10] 중력
-         * @constructs
-         */
         $init : function (nWidth, nHeight, nGravity) {
             this._oDebugLayer = null;
             this._oDebugDraw = null;

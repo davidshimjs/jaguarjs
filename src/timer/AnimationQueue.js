@@ -1,9 +1,10 @@
 /**
  * 계획된 여러 애니메이션을 다룰 수 있는 Queue
- * <a href="../tutorial/timer_queue.html" target="_blank">튜토리얼 보기</a>
+ * 
+ * [튜토리얼 보기](../tutorial/timer_queue.html)
  * 
  * @see collie.Timer
- * @class collie.AnimationQueue
+ * @class
  * @extends collie.Animation
  * @param {Object} [htOption]
  * @param {Object} [htOption.loop=1] 큐 반복 횟수, 0일 경우 무한 반복 한다
@@ -13,9 +14,6 @@
  *              transition(function () {}, 1000, { from : 1, to : 1 });
  */
 collie.AnimationQueue = collie.Class(/** @lends collie.AnimationQueue.prototype */{
-    /**
-     * @constructs
-     */
     $init : function (htOption) {
         this.option("loop", 1);
         this.option(htOption || {});

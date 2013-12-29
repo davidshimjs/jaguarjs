@@ -1,4 +1,4 @@
-/*
+/*!
  * TERMS OF USE - EASING EQUATIONS
  * Open source under the BSD License.
  * Copyright (c) 2001 Robert Penner, all rights reserved.
@@ -6,8 +6,8 @@
 /**
  * 새로운 이펙트 함수를 생성한다.
  * 진도 프레임워크의 jindo.Effect를 사용
- * @namespace 수치의 중간값을 쉽게 얻을 수 있게 하는 static 컴포넌트
- * @function
+ * 수치의 중간값을 쉽게 얻을 수 있게 하는 static 컴포넌트
+ * @namespace
  * @param {Function} fEffect 0~1 사이의 숫자를 인자로 받아 정해진 공식에 따라 0~1 사이의 값을 리턴하는 함수
  * @return {Function} 이펙트 함수. 이 함수는 시작값과 종료값을 입력하여 특정 시점에 해당하는 값을 구하는 타이밍 함수를 생성한다.
  */
@@ -400,6 +400,7 @@ collie.Effect.easeOutInExpo = collie.Effect(function(s) {
  * @param {Number} y1
  * @param {Number} x2
  * @param {Number} y2
+ * @private
  * @see http://www.netzgesta.de/dev/cubic-bezier-timing-function.html
  */
 collie.Effect._cubicBezier = function(x1, y1, x2, y2){

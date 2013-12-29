@@ -5,7 +5,7 @@
  * - You can use the addTo method with the method chaining
  * - A DisplayObject should be set useCache option as true if it doesn't change frequently.
  * 
- * @class collie.DisplayObject
+ * @class
  * @extends collie.Component
  * @param {Object} [htOption] Options
  * @param {String} [htOption.name] 객체 이름, 중복 가능
@@ -55,9 +55,6 @@ collie.DisplayObject = collie.Class(/** @lends collie.DisplayObject.prototype */
 	 */
 	type : "displayobject",
 
-	/**
-	 * @constructs
-	 */
 	$init : function (htOption) {
 		this._bInitOption = true;
 		this._htOption = {

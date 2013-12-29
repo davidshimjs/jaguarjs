@@ -1,8 +1,8 @@
 /**
  * Drawing Polyline
- * If you want to see a polyline using DOM Rendering, you need the <a href="http://raphaeljs.com" target="_blank">Raphael.js</a> 2.1.0 or above.
+ * If you want to see a polyline using DOM Rendering, you need the [Raphael.js](http://raphaeljs.com) 2.1.0 or above.
  * 
- * @class collie.Polyline
+ * @class
  * @extends collie.DisplayObject
  * @requires http://raphaeljs.com
  * @param {Object} [htOption] Options
@@ -35,9 +35,6 @@
  * line.lineTo(200, 0); // expand boundary and set change status.
  */
 collie.Polyline = collie.Class(/** @lends collie.Polyline.prototype */{
-    /**
-     * @constructs
-     */
     $init : function (htOption) {
         this.option({
             strokeColor : '#000000',

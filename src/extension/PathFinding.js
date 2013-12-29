@@ -8,6 +8,7 @@
  * @param {collie.Map} fBeforeMove.map 맵
  * @requires collie.addon.js
  * @example
+```
 var finder = new collie.PathFinding(map, function (tile, map) {
     if (tile.isBlock) { // isBlock is a custom option.
         return false;
@@ -25,11 +26,9 @@ console.log(aPath);
 if (finder.beforeMove(map.getTile(5, 5))) {
     console.log("I can go there!");
 }
+```
  */
 collie.PathFinding = collie.Class(/** @lends collie.PathFinding.prototype */{
-    /**
-     * @constructs
-     */
     $init : function (oMap, fBeforeMove) {
         this._oMap = oMap;
         this._fBeforeMove = fBeforeMove;

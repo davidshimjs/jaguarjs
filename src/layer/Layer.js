@@ -2,7 +2,7 @@
  * A Layer contains many displayObjects.
  * In Canvas mode, one layer is one canvas element.
  * If you have been using just one canvas element, try to have a few layers. But not too many.
- * @class collie.Layer
+ * @class
  * @extends collie.Component
  * @param {Object} [htOption]
  * @param {Number} [htOption.width=320] (px) It only works when initialize this class. It's different from a set method in displayObject.
@@ -21,9 +21,6 @@ collie.Layer = collie.Class(/** @lends collie.Layer.prototype */{
      */
     type : "layer",
     
-    /**
-     * @constructs
-     */
     $init : function (htOption) {
         this.option({
             x : 0,
@@ -248,14 +245,14 @@ collie.Layer = collie.Class(/** @lends collie.Layer.prototype */{
      * @return {collie.Layer} For method chaining
      * @example
      * before
-     * <code>
+     * ```
      * var layer = new collie.Layer();
      * collie.Renderer.addLayer(layer);
-     * </code>
+     * ```
      * after
-     * <code>
+     * ```
      * var layer = new collie.Layer().addTo();
-     * </code>
+     * ```
      */
     addTo : function (oRenderer) {
         oRenderer = oRenderer || collie.Renderer;

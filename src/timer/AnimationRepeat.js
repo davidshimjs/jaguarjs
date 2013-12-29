@@ -1,11 +1,11 @@
 /**
  * 특정 시간 간격으로 계속 반복되는 타이머
- * <a href="../tutorial/timer_repeat.html" target="_blank">튜토리얼 보기</a>
+ * [튜토리얼 보기](../tutorial/timer_repeat.html)
  * 
  * timeline ---------------------------------&gt;
  * action   * duration * duration * duration *
  * @see collie.Timer
- * @class collie.AnimationRepeat
+ * @class
  * @extends collie.Animation
  * @param {Function} fCallback 실행될 콜백 함수
  * @param {collie.AnimationCycle} fCallback.timer 현재 타이머 인스턴스
@@ -21,9 +21,6 @@
  * @param {Number} [htOption.useRealTime=true] SkippedFrame을 적용해서 count 값을 보정한다
  */
 collie.AnimationRepeat = collie.Class(/** @lends collie.AnimationRepeat.prototype */{
-    /**
-     * @constructs
-     */
     $init : function (fCallback, nDuration, htOption) {
         this.option({
             beforeDelay : 0,

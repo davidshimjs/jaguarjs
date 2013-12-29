@@ -1,7 +1,7 @@
 /**
  * 애니메이션 부모 클래스
  * 
- * @class collie.Animation
+ * @class
  * @extends collie.Component
  * @param {Function} fCallback 타이머 콜백 함수
  * @param {Number} nDuration 타이머 실행 시간, 지연 시간 (ms)
@@ -10,9 +10,6 @@
  * @param {Function} [htOption.on이벤트명] onComplete와 같이 이벤트명을 사용해서 attach를 직접하지 않고 옵션으로 할 수 있다
  */
 collie.Animation = collie.Class(/** @lends collie.Animation.prototype */{
-    /**
-     * @constructs
-     */
     $init : function (fCallback, nDuration, htOption) {
         this._nId = ++collie.Animation._idx;
         this._bIsPlaying = false;

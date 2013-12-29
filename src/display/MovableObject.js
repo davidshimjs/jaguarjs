@@ -1,7 +1,7 @@
 /**
  * 속도, 가속도, 마찰력, 질량을 포함한 표시 객체
  * - rotate는 마찰력이 없다
- * @class collie.MovableObject
+ * @class
  * @deprecated DisplayObject에 기능 추가
  * @extends collie.DisplayObject
  * @param {Object} [htOption] 설정
@@ -16,9 +16,6 @@
  * @param {Boolean} [htOption.useRealTime=true] SkippedFrame을 적용해서 싸이클을 현재 시간과 일치
  */
 collie.MovableObject = collie.Class(/** @lends collie.MovableObject.prototype */{
-    /**
-     * @constructs
-     */
     $init : function (htOption) {
         // this.option({
             // velocityX : 0,

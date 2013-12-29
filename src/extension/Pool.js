@@ -29,16 +29,13 @@
  * pool.changeSize(20);
  * @example
  * You can also make the Pool contain other classes.
- * <code>
+ * ```
  * var circlePool = new collie.Pool(10, {
  *  radius : 10
  * }, collie.Circle);
- * </code>
+ * ```
  */
 collie.Pool = collie.Class(/** @lends collie.Pool.prototype */{
-    /**
-     * @constructs
-     */
     $init : function (nSize, htOption, fClass) {
         this._nSize = nSize || 0;
         this._htDefaultOption = htOption;

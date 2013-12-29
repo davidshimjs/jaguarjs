@@ -1,13 +1,14 @@
 /**
  * 특정 시간 동안 실행된 후 대기 시간 이후에 다시 실행되는 싸이클 애니메이션
  * 주로 Sprite 애니메이션에 사용 된다.
- * <a href="../tutorial/timer_cycle.html" target="_blank">튜토리얼 보기</a>
+ * 
+ * [튜토리얼 보기](../tutorial/timer_cycle.html)
  * 
  * timeline ------------------------------------&gt;
  * action   *-duration-* delay *-duration-* delay
  * 
  * @see collie.Timer
- * @class collie.AnimationCycle
+ * @class
  * @extends collie.Animation
  * @param {Function|collie.DisplayObject|Array} fCallback 실행될 콜백 함수, DisplayObject를 넣게 되면 해당 객체에 관한 내용만 변경함. htOption의 set 참조.
  * @param {collie.AnimationCycle} fCallback.timer 현재 타이머 인스턴스
@@ -33,20 +34,20 @@
  * @param {Number} [htOption.start] from 값이 아닌 값부터 시작할 경우 값을 설정. ex) from:0, to:3 일 때 2, 3, 0, 1, 2, 3... 으로 진행할 경우 start:2 값을 설정
  * @example
  * valueSet 사용 방법, step, from, to 옵션은 자동으로 설정된다
- * <code>
+ * ```
  * collie.Timer.cycle(function () {
  *  // 0, 1, 2, 1, 0 순으로 플레이
  * }, 1000, {
  *  valueSet : [0, 1, 2, 1, 0]
  * });
- * </code>
+ * ```
  * 
  * DisplayObject를 callback으로 사용해서 스프라이트 애니메이션을 구현하는 방법
- * <code>
+ * ```
  * collie.Timer.cycle(oDisplayObject, 1000, {
  *  valueSet : [0, 1, 2, 1, 0]
  * });
- * </code>
+ * ```
  * 
  * fps 단위를 쓰면 프레임 당 재생 속도를 설정할 수 있다. 8프레임이니 이 경우에 24fps는 (1000 / 24 * 8)ms가 된다.
  * <code>
@@ -57,9 +58,6 @@
  * </code>
  */
 collie.AnimationCycle = collie.Class(/** @lends collie.AnimationCycle.prototype */{
-    /**
-     * @constructs
-     */
     $init : function (fCallback, nDuration, htOption) {
         this._nFPS = null;
         this._htCallback = {};

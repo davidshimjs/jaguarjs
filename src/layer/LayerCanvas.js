@@ -2,14 +2,10 @@
  * 캔버스 방식의 렌더링
  * 
  * @private
- * @class collie.LayerCanvas
+ * @class
  * @param {collie.Layer} oLayer
  */
 collie.LayerCanvas = collie.Class(/** @lends collie.LayerCanvas.prototype */{
-    /**
-     * @private
-     * @constructs
-     */
     $init : function (oLayer) {
         this._oLayer = oLayer;
         this._oEvent = oLayer.getEvent();

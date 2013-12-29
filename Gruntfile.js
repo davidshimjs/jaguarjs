@@ -50,6 +50,26 @@ module.exports = function (grunt) {
             debug: {
                 files: scripts.all,
                 tasks: ['debug']
+            },
+
+            less: {
+                files: ['docs/templates/jaguar/less/**/*.less'],
+                tasks: ['less']
+            },
+
+            lesscopy: {
+                files: ['docs/templates/jaguar/static/styles/jaguar.css'],
+                tasks: ['copy:css']
+            },
+
+            jscopy: {
+                files: ['docs/templates/jaguar/static/scripts/main.js'],
+                tasks: ['copy:js']
+            },
+
+            jsdoc: {
+                files: ['docs/templates/jaguar/**/*.tmpl', 'docs/templates/jaguar/*.js'],
+                tasks: ['jsdoc:debug']
             }
         },
 
@@ -149,6 +169,53 @@ module.exports = function (grunt) {
                 src: scripts.tool,
                 dest: DIST + '/' + names.tool + names.min + names.ext
             }
+        },
+
+        clean: {
+            jsdoc: {
+                src: 'docs/dist'
+            }
+        },
+
+        jsdoc: {
+            dist: {
+                src: [SRC + '/**/*.js', 'README.md'],
+                options: {
+                    destination: 'docs/dist',
+                    configure: 'docs/templates/jaguar/conf.json',
+                    template: 'docs/templates/jaguar',
+                    'private': false
+                }
+            },
+
+            debug: {
+                src: [SRC + '/timer/*.js', 'README.md'],
+                options: {
+                    destination: 'docs/dist',
+                    configure: 'docs/templates/jaguar/conf.json',
+                    template: 'docs/templates/jaguar',
+                    'private': false
+                }
+            }
+        },
+
+        less: {
+            dist: {
+                src: 'docs/templates/jaguar/less/**/jaguar.less',
+                dest: 'docs/templates/jaguar/static/styles/jaguar.css'
+            }
+        },
+
+        copy: {
+            css: {
+                src: 'docs/templates/jaguar/static/styles/jaguar.css',
+                dest: 'docs/dist/styles/jaguar.css'
+            },
+
+            js: {
+                src: 'docs/templates/jaguar/static/scripts/main.js',
+                dest: 'docs/dist/scripts/main.js'
+            }
         }
     });
 
@@ -159,7 +226,10 @@ module.exports = function (grunt) {
         'grunt-contrib-concat',
         'grunt-contrib-copy',
         'grunt-contrib-uglify',
-        'grunt-string-replace'
+        'grunt-contrib-clean',
+        'grunt-string-replace',
+        'grunt-jsdoc',
+        'grunt-contrib-less'
     ].forEach(function (taskName) {
         grunt.loadNpmTasks(taskName);
     });
@@ -196,5 +266,17 @@ module.exports = function (grunt) {
         'uglify:addon',
         'uglify:tool',
         'string-replace:minify'
+    ]);
+
+    grunt.registerTask('doc', 'Create documentations', [
+        'less',
+        'clean:jsdoc',
+        'jsdoc:dist'
+    ]);
+
+    grunt.registerTask('doc_debug', 'Create documentations', [
+        'less',
+        'clean:jsdoc',
+        'jsdoc:debug'
     ]);
 };

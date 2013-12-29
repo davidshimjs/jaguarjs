@@ -57,9 +57,6 @@ collie.Sensor = collie.Class(/** @lends collie.Sensor.prototype */{
      */
     RAY_SENSING_DISTANCE : 10, // px
     
-    /**
-     * @constructs
-     */
     $init : function (htOption) {
         this.option({
             frequency : 3,

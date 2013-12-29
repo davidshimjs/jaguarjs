@@ -1,11 +1,8 @@
 /**
  * 별도의 이벤트를 다룰 수 있고 옵션 값을 갖는 컴포넌트 클래스
- * @class collie.Component
+ * @class
  */
 collie.Component = collie.Class(/** @lends collie.Component.prototype */{
-    /**
-     * @constructs
-     */
     $init : function () {
         this._bInitOption = false;
         this._htOption = {};

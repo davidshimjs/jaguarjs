@@ -1,9 +1,9 @@
 /**
  * collie.Effect를 사용한 Transition 타이머
- * <a href="../tutorial/timer_transition.html" target="_blank">튜토리얼 보기</a>
+ * [튜토리얼 보기](../tutorial/timer_transition.html)
  *
  * @example
- * <code>
+ * ```
  * 여러 개의 값으로 트랜지션
  * collie.Timer.transition(function (oEvent) {
  *  oDisplayObject.set("opacity", oEvent.value[0]);
@@ -12,31 +12,31 @@
  *  from : [1, 100],
  *  to : [0, 300]
  * });
- * </code>
+ * ```
  * 
  * @example
  * DisplayObject를 callback으로 사용해서 여러 속성을 변경하는 방법
- * <code>
+ * ```
  * collie.Timer.transition(oDisplayObject, 1000, {
  *  from : [10, 10], // from 은 생략 가능, 생략하면 현재 값이 자동으로 입력 됨
  *  to : [100, 200],
  *  set : ["x", "y"]
  * });  
- * </code>
+ * ```
  * 하지만 이 때에는 DisplayObject의 move 메서드를 사용하는 것이 좋음
  * 
  * @example
  * 여러 개의 DisplayObject를 한꺼번에 실행할 수도 있음
- * <code>
+ * ```
  * collie.Timer.transition([oDisplayObjectA, oDisplayObjectB], 1000, {
  *  from : 0, // 이 때에는 from 생략 불가능
  *  to : 1,
  *  set : "opacity"
  * });
- * </code>
+ * ```
  * 
  * @see collie.Timer
- * @class collie.AnimationTransition
+ * @class
  * @extends collie.Animation
  * @param {Function|collie.DisplayObject|Array} fCallback 실행될 콜백 함수, DisplayObject를 넣게 되면 해당 객체에 관한 내용만 변경함. htOption의 set 참조.
  * @param {collie.AnimationCycle} fCallback.timer 현재 타이머 인스턴스
@@ -57,9 +57,6 @@
  * @see collie.Effect
  */
 collie.AnimationTransition = collie.Class(/** @lends collie.AnimationTransition.prototype */{
-    /**
-     * @constructs
-     */
     $init : function (fCallback, nDuration, htOption) {
         this.option({
             from : null, // 시작 값(배열로 넣을 수 있음)
@@ -287,9 +284,3 @@ collie.AnimationTransition = collie.Class(/** @lends collie.AnimationTransition.
         }
     }
 }, collie.Animation);
-
-/**
- * 이벤트 효과 함수
- * @namespace
- * @name collie.Effect
- */

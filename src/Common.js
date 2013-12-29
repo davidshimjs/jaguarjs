@@ -20,7 +20,7 @@ var collie = collie || {};
      * @param {collie.Class} oParent 상속받을 부모 클래스
      * @return {collie.Class}
      * @example
-     * <code>
+     * ```
      * var Person = collie.Class({
      *  gender : false,
      *  walk : function () { return "walking!"; }
@@ -37,10 +37,10 @@ var collie = collie || {};
      * alert(oDavid.name); // david
      * alert(oDavid.gender); // male
      * alert(oDavid.walk()); // walking!
-     * </code>
+     * ```
      * @example
      * override
-     * <code>
+     * ```
      * var Person = collie.Class({
      *  testMethod : function () {
      *  
@@ -53,10 +53,10 @@ var collie = collie || {};
      *      this.constructor.$super.testMethod.apply(this, arguments);      
      *  }
      * }, Person);
-     * </code>
+     * ```
      * @example
      * You can also use create a instance without 'new' keyword
-     * <code>
+     * ```
      * var Person = collie.Class({
      *  $init : function () {
      *  },
@@ -66,7 +66,7 @@ var collie = collie || {};
      * 
      * var a = new Person();
      * var b = Person(); // It works fine!
-     * </code>
+     * ```
      */
     collie.Class = function (o, oParent) {      
         var $init = null;

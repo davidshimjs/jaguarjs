@@ -2,14 +2,10 @@
  * DisplayObject의 DOM 표시 부분
  * @todo 갤럭시 넥서스 ICS에서 CSS3d rotate 사용 시 overflow boundary가 잘못되는 문제점이 있어서 그 부분만 css2d로 동작하도록 변경 했지만, 렌더링 속도가 2d, 3d 차이나는 버그가 남아 있음.
  * @private
- * @class collie.DisplayObjectDOM
+ * @class
  * @param {collie.DisplayObject} oDisplayObject
  */
 collie.DisplayObjectDOM = collie.Class(/** @lends collie.DisplayObjectDOM.prototype */{
-    /**
-     * @private
-     * @constructs
-     */
     $init : function (oDisplayObject) {
         this._oDisplayObject = oDisplayObject;
         this._htInfo = this._oDisplayObject.get();

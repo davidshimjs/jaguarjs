@@ -3,14 +3,10 @@
  * - 직접 사용되지 않는 클래스
  * 
  * @private
- * @class collie.DisplayObjectCanvas
+ * @class
  * @param {collie.DisplayObject} oDisplayObject
  */
 collie.DisplayObjectCanvas = collie.Class(/** @lends collie.DisplayObjectCanvas.prototype */{
-    /**
-     * @private
-     * @constructs
-     */
     $init : function (oDisplayObject) {
         this._oDisplayObject = oDisplayObject;
         this._bUseCache = false;

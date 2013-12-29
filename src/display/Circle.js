@@ -1,6 +1,6 @@
 /**
  * Drawing Circle
- * If you want to draw a circle using DOM rendering, you need the <a href="http://raphaeljs.com" target="_blank">Raphael.js</a> library, version 2.1.0 or newer.
+     * If you want to draw a circle using DOM rendering, you need the [Raphael.js](http://raphaeljs.com) library, version 2.1.0 or newer.
  * 
  * @class
  * @extends collie.DisplayObject
@@ -36,9 +36,6 @@
  * });
  */
 collie.Circle = collie.Class(/** @lends collie.Circle.prototype */{
-    /**
-     * @constructs
-     */
     $init : function (htOption) {
         this.option({
             radius : 0,

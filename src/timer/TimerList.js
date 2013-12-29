@@ -2,13 +2,9 @@
  * Timer 목록
  * 
  * @private
- * @class collie.TimerList
+ * @class
  */
 collie.TimerList = collie.Class(/** @lends collie.TimerList.prototype */{
-    /**
-     * @constructs
-     * @private
-     */
     $init : function () {
         this._aList = [];
     },

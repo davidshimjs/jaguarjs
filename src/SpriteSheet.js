@@ -1,6 +1,6 @@
 /**
- * @class
  * @private
+ * @class
  * @example
  * collie.ImageManager.add({
  *  "sample" : "sample.png"

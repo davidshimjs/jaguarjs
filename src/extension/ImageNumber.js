@@ -2,7 +2,7 @@
  * 비트맵으로 구성된 숫자를 사용하기 위한 클래스
  * 0과 양수만 표현할 수 있다.
  * number에서 쓰이는 이미지는 0부터 9까지 가로로 나열된 스프라이트 이미지여야한다
- * @class collie.ImageNumber
+ * @class
  * @extends collie.DisplayObject
  * @param {Object} [htOption] 설정
  * @param {String} [htOption.textAlign="left"] 숫자 정렬 방법, left, right, center를 설정할 수 있다.
@@ -29,9 +29,6 @@
  * number.comma(false); // It would be shown by "999000"
  */
 collie.ImageNumber = collie.Class(/** @lends collie.ImageNumber.prototype */{
-    /**
-     * @constructs
-     */
     $init : function (htOption) {
         this._aNumber = [];
         this._aComma = [];

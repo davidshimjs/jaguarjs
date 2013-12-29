@@ -1,9 +1,8 @@
 /**
  * Text
  * - 말줄임은 Canvas일 때만 된다. DOM은 미구현
- * TODO Text는 말줄임과 자동 줄바꿈 때문에 모바일에서 사용하면 굉장히 느리다. WebWorker를 쓸 수 있는지 확인해 봐야 할 것
- * 
- * @class collie.Text
+ * @todo Text는 말줄임과 자동 줄바꿈 때문에 모바일에서 사용하면 굉장히 느리다. WebWorker를 쓸 수 있는지 확인해 봐야 할 것
+ * @class
  * @extends collie.DisplayObject
  * @param {Object} [htOption]
  * @param {Object} [htOption.fontFamily='Arial'] 글꼴
@@ -18,7 +17,7 @@
  * @param {Object} [htOption.useEllipsis=false] 말줄임 사용 여부
  * @example
  * 기본적인 사용법
- * <code>
+ * ```
  * var oText = new collie.Text({
  *  width : 100, // 너비와 높이를 반드시 지정해야 합니다.
  *  height : 100,
@@ -26,12 +25,9 @@
  *  y : 0,
  *  fontColor : "#000000"
  * }).text("테스트 입니다");
- * </code>
+ * ```
  */
 collie.Text = collie.Class(/** @lends collie.Text.prototype */{
-    /**
-     * @constructs
-     */
     $init : function (htOption) {
         this._sText = "";
         this.option({

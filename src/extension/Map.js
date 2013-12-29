@@ -61,9 +61,6 @@ map.attach({
 });
  */
 collie.Map = collie.Class(/** @lends collie.Map.prototype */{
-    /**
-     * @constructs
-     */
     $init : function (nTileWidth, nTileHeight, htOption) {
         this._oLayer = null;
         this._oObjectLayer = null;
