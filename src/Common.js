@@ -5,7 +5,7 @@ var collie = collie || {};
 
 (function () {
     /**
-     * It'll be replaced automatically. so you don't need edit this value.
+     * This value will be replaced automatically, so you don't need to edit it.
      * @name collie.version
      */
     collie.version = "{{version}}";
@@ -13,7 +13,7 @@ var collie = collie || {};
     /**
      * Make a Class
      * @method collie#Class
-     * @param {Object} o An Object contains members of this class. You can define the constructor with a `$init` property.
+     * @param {Object} o An Object which contains members of this class. You can define the constructor with a `$init` property.
      * @param {collie.Class} [oParent] You can insert a superclass if you need to inherit.
      * @return {collie.Class}
      * @example
@@ -31,28 +31,28 @@ var collie = collie || {};
      * var oDavid = new Male();
      * oDavid.name = "david";
      * 
-     * alert(oDavid.name); // david
-     * alert(oDavid.gender); // male
-     * alert(oDavid.walk()); // walking!
+     * console.log(oDavid.name); // david
+     * console.log(oDavid.gender); // male
+     * console.log(oDavid.walk()); // walking!
      * ```
      * @example
      * override
      * ```
      * var Person = collie.Class({
      *  testMethod : function () {
-     *  
+     *      // do something
      *  }
      * });
      * 
      * var Male = collie.Class({
      *  testMethod : function () {
-     *      // blah
+     *      // do something else
      *      this.constructor.$super.testMethod.apply(this, arguments);      
      *  }
      * }, Person);
      * ```
      * @example
-     * You can also create an instance without 'new' keyword
+     * You can also create an instance without using the 'new' keyword
      * ```
      * var Person = collie.Class({
      *  $init : function () {
@@ -129,7 +129,7 @@ var collie = collie || {};
     };
     
     /**
-     * utilities
+     * Utilities
      * @namespace
      */
     collie.util = new (collie.Class(/** @lends collie.util */{
@@ -147,8 +147,8 @@ var collie = collie || {};
         },
         
         /**
-         * Get an instance of DisplayObject by Id
-         * It mainly be used with DOM rendering.
+         * Get an instance of a DisplayObject by Id
+         * It is meant to be used mainly with DOM rendering.
          * 
          * @param {Number} nId
          * @return {collie.DisplayObject}
@@ -158,7 +158,7 @@ var collie = collie || {};
         },
         
         /**
-         * Get an instance of DisplayObject by name
+         * Get an instance of a DisplayObject by name
          * 
          * @param {String} sName
          * @return {collie.DisplayObject}
@@ -174,15 +174,15 @@ var collie = collie || {};
         },
         
         /**
-         * Returns an information of current device by an user-agent value.
+         * Returns information about the current device using the user-agent value.
          * 
          * @return {Object} htInfo
-         * @return {Boolean} htInfo.desktop whether it's a desktop or not
-         * @return {Boolean} htInfo.supportCanvas whether it supports CANVAS rendering or not
-         * @return {Boolean|Number} htInfo.android An Android version to two demical place. If It's not an android, It'll be false.
+         * @return {Boolean} htInfo.desktop Whether it's a desktop device or not
+         * @return {Boolean} htInfo.supportCanvas Whether it supports Canvas rendering or not
+         * @return {Boolean|Number} htInfo.android The Android version with two decimal place (e.g. 4.4.2). If it's not an Android device, this will be false.
          * @return {Boolean|Number} htInfo.ios iOS version. same as `htInfo.android`
          * @return {Boolean|Number} htInfo.ie IE version. same as `htInfo.android`.
-         * @return {Boolean|Number} htInfo.chrome whether an user-agent value contains `chrome` or not.
+         * @return {Boolean|Number} htInfo.chrome whether the user-agent value contains `chrome` or not.
          */
         getDeviceInfo : function (sAgent) {
             if (this._htDeviceInfo !== null && typeof sAgent === "undefined") {
@@ -241,10 +241,10 @@ var collie = collie || {};
         },
         
         /**
-         * Returns CSS vendor prefix
+         * Returns the CSS vendor prefix for the current browser
          * 
-         * @param {String} [sName] target CSS property name(included `-`). If It's an empty value, this method'll return only prefix.
-         * @param {Boolean} bJavascript you'll set this value as true if you want to use at javascript.
+         * @param {String} [sName] CSS property name to target (including `-`). If it's an empty value, this method will only return the vendor prefix.
+         * @param {Boolean} bJavascript set this value as true if you want the camelcase version (for JavaScript use).
          * @example
          * ```
          * collie.util.getCSSPrefix("transform"); // -webkit-transform
@@ -290,7 +290,7 @@ var collie = collie || {};
         },
         
         /**
-         * Whether current device supports CSS3 or not
+         * Whether the current device supports CSS3 or not
          * @return {Boolean}
          */
         getSupportCSS3 : function () {
@@ -302,7 +302,7 @@ var collie = collie || {};
         },
         
         /**
-         * Whether current device supports CSS3D or not
+         * Whether the current device supports CSS 3D or not
          * @return {Boolean}
          */
         getSupportCSS3d : function () {
@@ -332,7 +332,7 @@ var collie = collie || {};
         },
         
         /**
-         * Get an approximate value to avoid a floating value bug.
+         * Get an approximate value to avoid a floating value bug
          * @param {Number} nValue
          * @return {Number}
          */
@@ -342,7 +342,7 @@ var collie = collie || {};
         
         /**
          * Fixed degree value between 0 and 360
-         * @param {Number} nAngleRad radian angle
+         * @param {Number} nAngleRad angle in Radian
          * @return {Number}
          */
         fixAngle : function (nAngleRad) {
@@ -352,7 +352,7 @@ var collie = collie || {};
         },
         
         /**
-         * Returns distance between two points
+         * Returns the distance between two points
          * @param {Number} x1
          * @param {Number} y1
          * @param {Number} x2
@@ -408,7 +408,7 @@ var collie = collie || {};
         },
         
         /**
-         * 주소의 queryString을 객체화 한다
+         * Return the QueryString as an object
          * @return {Object}
          */
         queryString : function () {
@@ -464,9 +464,9 @@ var collie = collie || {};
         },
         
         /**
-         * element.addEventListener for cross-browsing
+         * element.addEventListener with cross-browser support
          * @param {HTMLElement|String} el
-         * @param {String} sName event name excluded `on` keyword.
+         * @param {String} sName Event name (excluding `on` keyword)
          * @param {Function} fHandler Event handler
          * @param {Boolean} bUseCapture
          */
@@ -483,9 +483,9 @@ var collie = collie || {};
         },
         
         /**
-         * element.removeEventListener for cross-browsing
+         * element.removeEventListener with cross-browser support
          * @param {HTMLElement|String} el
-         * @param {String} sName event name excluded `on` keyword.
+         * @param {String} sName Event name (excluding `on` keyword)
          * @param {Function} fHandler Event handler
          * @param {Boolean} bUseCapture
          */
@@ -502,7 +502,7 @@ var collie = collie || {};
         },
         
         /**
-         * `event.preventDefault` method for cross-browsing
+         * `event.preventDefault` with cross-browser support
          * @param {HTMLEvent} e
          */
         stopEventDefault : function (e) {
@@ -516,8 +516,8 @@ var collie = collie || {};
         },
         
         /**
-         * Get an position of a target element
-         * @param {HTMLElement|String} target element
+         * Get the position of an element
+         * @param {HTMLElement|String} Target element
          * @return {Object} htResult
          * @return {Number} htResult.x 
          * @return {Number} htResult.y
@@ -592,8 +592,8 @@ var collie = collie || {};
         };
     }
     
-    // Implementation the dashedLine method in Canvas
-    // I had fix some difference with Raphael.js
+    // Implementation of the dashedLine method in Canvas
+    // I had to fix some differences with Raphael.js
     // special thanks to Phrogz and Rod MacDougall
     // http://stackoverflow.com/questions/4576724/dotted-stroke-in-canvas
     var CP = window.CanvasRenderingContext2D && CanvasRenderingContext2D.prototype;
