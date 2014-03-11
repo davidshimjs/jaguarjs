@@ -1,56 +1,56 @@
 /**
- * - A DisplayObject is basic class for display object.
- * - A DisplayObject can have one or many displayObject like a DOM Element.
- * - A offset values changed by when you set a spriteX and spriteY options, but there is no change when you set offsetX and offsetY values.
- * - You can use the addTo method with the method chaining
- * - A DisplayObject should be set useCache option as true if it doesn't change frequently.
+ * - DisplayObject is basic class for display objects.
+ * - DisplayObject can contain one or many displayObjects, like a DOM element.
+ * - Offset values change when you set a spriteX and spriteY options, but do not change when you set offsetX and offsetY values.
+ * - You can use the addTo method with method chaining
+ * - DisplayObject should have its useCache option set as true if it doesn't change frequently
  * 
  * @class
  * @extends collie.Component
  * @param {Object} [htOption] Options
- * @param {String} [htOption.name] 객체 이름, 중복 가능
- * @param {Number|String} [htOption.width="auto"] 너비, auto 값일 경우 backgroundImage가 설정되면 해당 이미지 너비 만큼 자동으로 변경 된다
- * @param {Number|String} [htOption.height="auto"] 높이, auto 값일 경우 backgroundImage가 설정되면 해당 이미지 높이 만큼 자동으로 변경 된다
- * @param {Number|String} [htOption.x=0] x축 위치, left, right, center 값을 사용하면 부모를 기준으로 정렬
- * @param {Number|String} [htOption.y=0] y축 위치, top, bottom, center 값을 사용하면 부모를 기준으로 정렬
- * @param {Number} [htOption.zIndex=0] 표시 순서. 높을 수록 위에 있음. 같으면 추가한 순서대로
- * @param {Number} [htOption.opacity=1] 투명도(0~1)
- * @param {Number} [htOption.angle=0] 회전각(0~360 deg)
- * @param {Number} [htOption.scaleX=1] x축 비율
- * @param {Number} [htOption.scaleY=1] y축 비율
- * @param {Number} [htOption.originX=center] scale, angle 적용 가로 기준 [left, right, center, 숫자]
- * @param {Number} [htOption.originY=center] scale, angle 적용 세로 기준 [top, bottom, center, 숫자]
- * @param {Number} [htOption.offsetX=0] 배경 이미지 시작 x좌표
- * @param {Number} [htOption.offsetY=0] 배경 이미지 시작 y좌표
+ * @param {String} [htOption.name] Name of the object (can override a previous object)
+ * @param {Number|String} [htOption.width="auto"] Width (when set to auto, uses the backgroundImage width if backgroundImage is set)
+ * @param {Number|String} [htOption.height="auto"] Height (when set to auto, uses the backgroundImage height if backgroundImage is set)
+ * @param {Number|String} [htOption.x=0] X-axis position [left, right, center]
+ * @param {Number|String} [htOption.y=0] Y-axis position [top, bottom, center]
+ * @param {Number} [htOption.zIndex=0] Display order. 높을 수록 위에 있음. 같으면 추가한 순서대로
+ * @param {Number} [htOption.opacity=1] Opacity (float number between 0 and 1)
+ * @param {Number} [htOption.angle=0] Rotation angle (degrees)
+ * @param {Number} [htOption.scaleX=1] X-axis ratio
+ * @param {Number} [htOption.scaleY=1] Y-axis ratio
+ * @param {Number} [htOption.originX=center] X-axis coordinate of origin point, used for scaling and rotating [left, right, center, number in degrees]
+ * @param {Number} [htOption.originY=center] Y-axis coordinate of origin point, used for scaling and rotating [top, bottom, center, number in degrees]
+ * @param {Number} [htOption.offsetX=0] X-axis coordinate of the backgroundImage
+ * @param {Number} [htOption.offsetY=0] Y-axis coordinate of the backgroundImage
  * @param {Number} [htOption.spriteX=null] 배경 가로 스프라이트 index, 너비 * index 값으로 offsetX가 설정된다
  * @param {Number} [htOption.spriteY=null] 배경 세로 스프라이트 index, 높이 * index 값으로 offsetY가 설정된다
  * @param {Number} [htOption.spriteLength=0] 배경 스프라이트 frame수, 가로폭 제한 스프라이트일 경우에 전체 프레임 수를 지정한다. 높이가 height보다 크지 않은 경우 적용되지 않는다
- * @param {Number} [htOption.spriteSheet=null] 배경 스프라이트 시트 이름, ImageManager에서 addSprite로 정보를 넣었을 경우 사용할 수 있다
+ * @param {Number} [htOption.spriteSheet=null] Name of the spritesheet to use as background (before, you should reference the sprite using addSprite on ImageManager)
  * @param {Array} [htOption.rangeX=null] X좌표 가용 범위. 배열로 최소, 최대값을 설정 [min, max], 상대 좌표임(현재 객체의 x, y좌표와 동일)
  * @param {Array} [htOption.rangeY=null] Y좌표 가용 범위. 배열로 최소, 최대값을 설정 [min, max], 상대 좌표임(현재 객체의 x, y좌표와 동일)
  * @param {Boolean} [htOption.positionRepeat=false] x,y 좌표의 범위 설정(rangeX, rangeY)이 되어 있는 경우 범위를 벗어나면 원점으로 돌아오는지 여부를 설정. fasle면 경계값까지만 움직이고 멈춤
- * @param {String} [htOption.backgroundColor] 배경색
- * @param {String} [htOption.backgroundImage] 배경이미지, 이미지매니져 리소스 이름이나 엘리먼트
- * @param {String} [htOption.backgroundRepeat='no-repeat'] 배경 이미지 반복 방법 repeat, repeat-x, repeat-y, no-repeat, no-repeat이 아니라면 useCache가 자동으로 true로 변함
- * @param {Boolean} [htOption.fitImage=false] 이미지를 객체 크기에 맞추기 
+ * @param {String} [htOption.backgroundColor] Color of the background
+ * @param {String} [htOption.backgroundImage] Image to use as background (before, you should reference the image using add on ImageManager)
+ * @param {String} [htOption.backgroundRepeat='no-repeat'] Rule for repeating the backgroundImage, like in CSS [repeat, repeat-x, repeat-y, no-repeat] no-repeat 이 아니라면 useCache가 자동으로 true로 변함
+ * @param {Boolean} [htOption.fitImage=false] Whether or not to fit the backgroundImage to the DisplayObject
  * @param {collie.DisplayObject|Array} [htOption.hitArea] 이벤트 영역으로 사용될 다른 객체나 Polyline Path를 배열로 설정한다. 이 때 좌표는 상대 좌표 [[x1, y1], [x2, y2], ...] 
  * @param {Boolean} [htOption.debugHitArea=false] 이벤트 영역으로 사용된 hitArea를 화면에서 직접 확인할 수 있다. 성능에 좋지 않기 때문에 디버깅할 때만 사용해야 한다. 
- * @param {Number} [htOption.velocityX=0] x축 속도(초당 px)
- * @param {Number} [htOption.velocityY=0] y축 속도(초당 px)
- * @param {Number} [htOption.velocityRotate=0] 회전 속도(초당 1도)
- * @param {Number} [htOption.forceX=0] x축 힘(초당 px)
- * @param {Number} [htOption.forceY=0] y축 힘(초당 px)
- * @param {Number} [htOption.forceRotate=0] 회전 힘(초당 1도)
- * @param {Number} [htOption.mass=1] 질량
- * @param {Number} [htOption.friction=0] 마찰력
+ * @param {Number} [htOption.velocityX=0] X-axis velocity (px)
+ * @param {Number} [htOption.velocityY=0] Y-axis velocity (px)
+ * @param {Number} [htOption.velocityRotate=0] Rotation velocity (degrees per second)
+ * @param {Number} [htOption.forceX=0] X-axis force (px per second)
+ * @param {Number} [htOption.forceY=0] Y-axis force (px per second)
+ * @param {Number} [htOption.forceRotate=0] Rotation force (초당 1도)
+ * @param {Number} [htOption.mass=1] Mass
+ * @param {Number} [htOption.friction=0] Friction
  * @param {Boolean} [htOption.useRealTime=true] SkippedFrame을 적용해서 싸이클을 현재 시간과 일치 
- * @param {Boolean} [htOption.useCache=false] 타일 캐시 사용 여부. 자식 객체를 모두 자신의 Context에 그려 놓는다.
+ * @param {Boolean} [htOption.useCache=false] Whether or not to use cache. 자식 객체를 모두 자신의 Context에 그려 놓는다.
  * @param {String|Boolean} [htOption.useEvent="auto"] 이벤트 사용 여부, Layer옵션과 DisplayObject 옵션 중에 하나라도 false라면 동작하지 않는다. auto면 attach된 이벤트가 있을 경우에만 동작한다 
- * @param {Boolean} [htOption.visible=true] 화면 표시 여부. false면 자식 객체도 보이지 않는다. "hidden" 값으로 설정하면 자식 객체는 표시하고 자신만 보이지 않게 한다
+ * @param {Boolean} [htOption.visible=true] Whether or not to display the object. false면 자식 객체도 보이지 않는다. "hidden" 값으로 설정하면 자식 객체는 표시하고 자신만 보이지 않게 한다
  */
 collie.DisplayObject = collie.Class(/** @lends collie.DisplayObject.prototype */{
 	/**
-	 * 클래스 타입
+	 * Class type
 	 * @type {String}
 	 */
 	type : "displayobject",
@@ -139,7 +139,7 @@ collie.DisplayObject = collie.Class(/** @lends collie.DisplayObject.prototype */
 	},
 	
 	/**
-	 * 설정 값을 변경한다
+	 * Set the options
 	 * @example
 	 * oDisplayObject.set({
 	 * 	visible : false,
@@ -148,11 +148,11 @@ collie.DisplayObject = collie.Class(/** @lends collie.DisplayObject.prototype */
 	 * 
 	 * oDisplayObject.set("visible", true);
 	 * 
-	 * @param {String|Object} vKey 설정 이름. 여러개의 값을 Object로 한번에 설정할 수 있다.
-	 * @param {Variables} vValue 값
-	 * @param {Boolean} [bSkipSetter] setter를 수행하지 않음. 일반적으로 사용하는 것은 권장하지 않는다
-	 * @param {Boolean} [bSkipChanged] 상태 변경을 하지 않는다. 상태변경을 하지 않게 되면 다시 그리지 않는다
-	 * @return {collie.DisplayObject} For Method Chaining
+	 * @param {String|Object} vKey Name of the option. Multiple values can be set using an object.
+	 * @param {Variables} vValue Value.
+	 * @param {Boolean} [bSkipSetter] Do not perform the setter. Not recommended for general use.
+	 * @param {Boolean} [bSkipChanged] Do not change the state. The object will not be redrawn.
+	 * @return {collie.DisplayObject} For method chaining.
 	 */
 	set : function (vKey, vValue, bSkipSetter, bSkipChanged) {
 		if (typeof vKey === "object") {
@@ -196,8 +196,8 @@ collie.DisplayObject = collie.Class(/** @lends collie.DisplayObject.prototype */
 	/**
 	 * setter
 	 * @private
-	 * @param {String} vKey 설정 이름
-	 * @param {Variables} vValue 값
+	 * @param {String} vKey Option name
+	 * @param {Variables} vValue Value
 	 */
 	_setter : function (vKey, vValue) {
 		// zIndex hash 갱신
@@ -265,15 +265,14 @@ collie.DisplayObject = collie.Class(/** @lends collie.DisplayObject.prototype */
 	},
 	
 	/**
-	 * 설정 값을 가져온다
-	 * @param {String} sKey 값이 없으면 전체 값을 반환
-	 * @return {Variable|Object} 설정 값
+	 * Get the value of an option
+	 * @param {String} sKey Key of the option (will return all the options if not set).
+	 * @return {Variable|Object} Value of the option or object containing all options if sKey is not set.
 	 * @example
 	 * var htData = oDisplayObject.get();
 	 * var bVisible = oDisplayObject.get("visible");
 	 * @example
-	 * <caption>성능을 올리기 위해서는 메서드 호출을 최소한으로 줄이는 것이 좋다
-	 * If you want to improve performance to your service, you should use less method call.</caption>
+	 * // Use less calls to this method to improve performance.
 	 * // before
 	 * var x = oDisplayObject.get("x");
 	 * var y = oDisplayObject.get("y");
@@ -287,7 +286,7 @@ collie.DisplayObject = collie.Class(/** @lends collie.DisplayObject.prototype */
 	 * htInfo.width;
 	 * htInfo.height;
 	 * 
-	 * // or you can access a htOption object directly. It's not recommend but It's better than frequently method call.
+	 * // or you can access the htOption object directly. It's not recommended but it's better than frequently call the get method.
 	 * oDisplayObject._htOption.x;
 	 * oDisplayObject._htOption.y;
 	 * oDisplayObject._htOption.width;
@@ -343,10 +342,10 @@ collie.DisplayObject = collie.Class(/** @lends collie.DisplayObject.prototype */
 	},
 	
 	/**
-	 * DisplayObject의 자식을 추가 한다
-	 * - 자식으로 들어간 DisplayObject는 현재 DisplayObject의 zIndex 영향을 받게 된다
+	 * Add a child DisplayObject
+	 * - the child DisplayObject will be affected by the current DisplayObject zIndex.
 	 * 
-	 * @param {collie.DisplayObject} oDisplayObject
+	 * @param {collie.DisplayObject} oDisplayObject DisplayObject to add.
 	 */
 	addChild : function (oDisplayObject) {
 		collie.util.pushWithSort(this._aDisplayObjects, oDisplayObject);
@@ -360,9 +359,9 @@ collie.DisplayObject = collie.Class(/** @lends collie.DisplayObject.prototype */
 	},
 	
 	/**
-	 * 자식을 제거 한다
-	 * @param {collie.DisplayObject} oDisplayObject
-	 * @param {Number} nIdx 인덱스 번호를 알고 있다면 인덱스 번호를 지정
+	 * Remove a child DisplayObject
+	 * @param {collie.DisplayObject} oDisplayObject DisplayObject to remove.
+	 * @param {Number} nIdx You can specify the index number if you know it, in order to improve performance.
 	 */
 	removeChild : function (oDisplayObject, nIdx) {
 		if (typeof nIdx !== "undefined") {
