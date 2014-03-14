@@ -1,6 +1,6 @@
 /**
- * - DisplayObject is basic class for display objects.
- * - DisplayObject can contain one or many displayObjects, like a DOM element.
+ * - DisplayObject is the basic class for display objects.
+ * - DisplayObject can contain one or many DisplayObjects, like a DOM element.
  * - Offset values change when you set a spriteX and spriteY options, but do not change when you set offsetX and offsetY values.
  * - You can use the addTo method with method chaining
  * - DisplayObject should have its useCache option set as true if it doesn't change frequently
@@ -8,12 +8,12 @@
  * @class
  * @extends collie.Component
  * @param {Object} [htOption] Options
- * @param {String} [htOption.name] Name of the object (can override a previous object)
+ * @param {String} [htOption.name] Name of the object (can be duplicated, like a DOM name attribute)
  * @param {Number|String} [htOption.width="auto"] Width (when set to auto, uses the backgroundImage width if backgroundImage is set)
  * @param {Number|String} [htOption.height="auto"] Height (when set to auto, uses the backgroundImage height if backgroundImage is set)
  * @param {Number|String} [htOption.x=0] X-axis position [left, right, center]
  * @param {Number|String} [htOption.y=0] Y-axis position [top, bottom, center]
- * @param {Number} [htOption.zIndex=0] Display order. 높을 수록 위에 있음. 같으면 추가한 순서대로
+ * @param {Number} [htOption.zIndex=0] Display order. Works like the z-index property in CSS (if multiple objects have the same zIndex value, the one that was added the latest will overlap the other ones).
  * @param {Number} [htOption.opacity=1] Opacity (float number between 0 and 1)
  * @param {Number} [htOption.angle=0] Rotation angle (degrees)
  * @param {Number} [htOption.scaleX=1] X-axis ratio
@@ -26,27 +26,27 @@
  * @param {Number} [htOption.spriteY=null] 배경 세로 스프라이트 index, 높이 * index 값으로 offsetY가 설정된다
  * @param {Number} [htOption.spriteLength=0] 배경 스프라이트 frame수, 가로폭 제한 스프라이트일 경우에 전체 프레임 수를 지정한다. 높이가 height보다 크지 않은 경우 적용되지 않는다
  * @param {Number} [htOption.spriteSheet=null] Name of the spritesheet to use as background (before, you should reference the sprite using addSprite on ImageManager)
- * @param {Array} [htOption.rangeX=null] X좌표 가용 범위. 배열로 최소, 최대값을 설정 [min, max], 상대 좌표임(현재 객체의 x, y좌표와 동일)
- * @param {Array} [htOption.rangeY=null] Y좌표 가용 범위. 배열로 최소, 최대값을 설정 [min, max], 상대 좌표임(현재 객체의 x, y좌표와 동일)
- * @param {Boolean} [htOption.positionRepeat=false] x,y 좌표의 범위 설정(rangeX, rangeY)이 되어 있는 경우 범위를 벗어나면 원점으로 돌아오는지 여부를 설정. fasle면 경계값까지만 움직이고 멈춤
+ * @param {Array} [htOption.rangeX=null] X-axis coordinate of the range this object can be moved on, you can set this value as [min, max]. This is a relative position.
+ * @param {Array} [htOption.rangeY=null] Y-axis coordinate of the range this object can be moved on, you can set this value as [min, max]. This is a relative position.
+ * @param {Boolean} [htOption.positionRepeat=false] Whether this object will move to the start point when it reaches the end point. You can set start and end points with the rangeX and rangeY options.
  * @param {String} [htOption.backgroundColor] Color of the background
  * @param {String} [htOption.backgroundImage] Image to use as background (before, you should reference the image using add on ImageManager)
- * @param {String} [htOption.backgroundRepeat='no-repeat'] Rule for repeating the backgroundImage, like in CSS [repeat, repeat-x, repeat-y, no-repeat] no-repeat 이 아니라면 useCache가 자동으로 true로 변함
+ * @param {String} [htOption.backgroundRepeat='no-repeat'] Rule for repeating the backgroundImage, like in CSS [repeat, repeat-x, repeat-y, no-repeat]. If this value is *not* no-repeat, the useCache option will be set as true automatically to improve performance.
  * @param {Boolean} [htOption.fitImage=false] Whether or not to fit the backgroundImage to the DisplayObject
- * @param {collie.DisplayObject|Array} [htOption.hitArea] 이벤트 영역으로 사용될 다른 객체나 Polyline Path를 배열로 설정한다. 이 때 좌표는 상대 좌표 [[x1, y1], [x2, y2], ...] 
- * @param {Boolean} [htOption.debugHitArea=false] 이벤트 영역으로 사용된 hitArea를 화면에서 직접 확인할 수 있다. 성능에 좋지 않기 때문에 디버깅할 때만 사용해야 한다. 
+ * @param {collie.DisplayObject|Array} [htOption.hitArea] You can set this value as a DisplayObject or a Polyline path (array of relative positions) what uses event area. For example: [[x1, y1], [x2, y2], ...]
+ * @param {Boolean} [htOption.debugHitArea=false] The custom event area will be displayed when this value is set as true. This feature is useful for debugging, but decreases performance.
  * @param {Number} [htOption.velocityX=0] X-axis velocity (px)
  * @param {Number} [htOption.velocityY=0] Y-axis velocity (px)
  * @param {Number} [htOption.velocityRotate=0] Rotation velocity (degrees per second)
  * @param {Number} [htOption.forceX=0] X-axis force (px per second)
  * @param {Number} [htOption.forceY=0] Y-axis force (px per second)
- * @param {Number} [htOption.forceRotate=0] Rotation force (초당 1도)
+ * @param {Number} [htOption.forceRotate=0] Rotation force (degrees per second)
  * @param {Number} [htOption.mass=1] Mass
  * @param {Number} [htOption.friction=0] Friction
- * @param {Boolean} [htOption.useRealTime=true] SkippedFrame을 적용해서 싸이클을 현재 시간과 일치 
- * @param {Boolean} [htOption.useCache=false] Whether or not to use cache. 자식 객체를 모두 자신의 Context에 그려 놓는다.
- * @param {String|Boolean} [htOption.useEvent="auto"] 이벤트 사용 여부, Layer옵션과 DisplayObject 옵션 중에 하나라도 false라면 동작하지 않는다. auto면 attach된 이벤트가 있을 경우에만 동작한다 
- * @param {Boolean} [htOption.visible=true] Whether or not to display the object. false면 자식 객체도 보이지 않는다. "hidden" 값으로 설정하면 자식 객체는 표시하고 자신만 보이지 않게 한다
+ * @param {Boolean} [htOption.useRealTime=true] When this value set as true, the Renderer will decide to skip a frame that was delayed.
+ * @param {Boolean} [htOption.useCache=false] Whether or not to use cache. It uses a canvas that draws children's view. This feature improves performance for rendering objects, but uses much more memory.
+ * @param {String|Boolean} [htOption.useEvent="auto"] Whether or not to use events. If either the Layer useEvent option or the DisplayObject useEvent option is false, this object won't use events. If this value is set as auto, It will use events when it has an events handler.
+ * @param {Boolean} [htOption.visible=true] Whether or not to display the object. If this option is set as false, the children will not be displayed either.
  */
 collie.DisplayObject = collie.Class(/** @lends collie.DisplayObject.prototype */{
 	/**
