@@ -22,9 +22,9 @@
  * @param {Number} [htOption.originY=center] Y-axis coordinate of origin point, used for scaling and rotating [top, bottom, center, number in degrees]
  * @param {Number} [htOption.offsetX=0] X-axis coordinate of the backgroundImage
  * @param {Number} [htOption.offsetY=0] Y-axis coordinate of the backgroundImage
- * @param {Number} [htOption.spriteX=null] 배경 가로 스프라이트 index, 너비 * index 값으로 offsetX가 설정된다
- * @param {Number} [htOption.spriteY=null] 배경 세로 스프라이트 index, 높이 * index 값으로 offsetY가 설정된다
- * @param {Number} [htOption.spriteLength=0] 배경 스프라이트 frame수, 가로폭 제한 스프라이트일 경우에 전체 프레임 수를 지정한다. 높이가 height보다 크지 않은 경우 적용되지 않는다
+ * @param {Number} [htOption.spriteX=null] X-axis index value of the sprite frame to display (will be used for Sprite animation). This value will be multiplied by the frame width, and used by the offsetX option.
+ * @param {Number} [htOption.spriteY=null] Y-axis index value of the sprite frame to display (will be used for Sprite animation). This value will be multiplied by the frame width, and used by the offsetX option.
+ * @param {Number} [htOption.spriteLength=0] Total number of frames present on the sprite.
  * @param {Number} [htOption.spriteSheet=null] Name of the spritesheet to use as background (before, you should reference the sprite using addSprite on ImageManager)
  * @param {Array} [htOption.rangeX=null] X-axis coordinate of the range this object can be moved on, you can set this value as [min, max]. This is a relative position.
  * @param {Array} [htOption.rangeY=null] Y-axis coordinate of the range this object can be moved on, you can set this value as [min, max]. This is a relative position.
