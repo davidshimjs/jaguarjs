@@ -22,7 +22,7 @@ How to build
     $ grunt build
     ```
     - `default` or an empty value: Watch project files. It'll build all files for debugging when you edit .js files. It also watch jsdoc templates, and you don't need make documentation if you edit only stylesheets(or less files) or main.js.
-    - `build`: Build all files info a `dist` folder.
+    - `build`: Build all files into a `dist` folder.
     - `doc`: Make documentations into a 'docs/dist' folder.
     - `doc_debug`: Make a simple documentation for debugging.
     
