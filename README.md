@@ -28,7 +28,7 @@ How to build
     
 Documentations
 ---
-http://davidshimjs.github.io/jaguarjs/doc/index.html
+http://davidshimjs.github.io/jaguarjs/doc/
 
 Forum
 ---
